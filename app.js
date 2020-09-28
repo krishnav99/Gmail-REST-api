@@ -1,14 +1,13 @@
-const { json } = require("body-parser");
-var express = require("express"),
-    bodyParser = require("body-parser"),
-    passport = require("passport"),
-    Credentials = require("./credentials"), //requiring credentials from a private file
-    fs = require("fs");
+const { json }      = require("body-parser");
+var express         = require("express"),
+    bodyParser      = require("body-parser"),
+    passport        = require("passport"),
+    GoogleStrategy  = require('passport-google-oauth20'),
+    Credentials     = require("./credentials"), //requiring credentials from a private file
+    fs              = require("fs");
 
-    var app = express();
+var app = express();
 var port= process.env.PORT || 3000;
-var GoogleStrategy = require('passport-google-oauth20'); 
-const user = require("../Web Development Bootcamp/Node.js projects/YelpCamp/v9/models/user");
 
 
 app.use(bodyParser.urlencoded({extended:true}));
@@ -64,7 +63,7 @@ function storeData(data){
         if(err) throw err;
         console.log(JSON.parse(readdata));
         if(!readdata.includes(JSON.stringify(data))){   //checking if the data does not exists previously
-          fs.writeFile("data.json", JSON.stringify(JSON.parse(readdata).concat(data)), function (err) {   //writing the data into the file
+          fs.writeFile("data.json", JSON.stringify(JSON.parse(readdata).concat(data)), function (err) {   //writing the data onto the file
             if (err) throw err;
             console.log('Saved!')}); 
           }      
