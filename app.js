@@ -98,7 +98,6 @@ app.get("/sendmail", function(req, res){
         emailList.push(element.emails[0].value)
       }
     }
-    console.log(JSON.parse(readdata))
     transporter.sendMail(mailOptions = {        //sends an email to each email adress in the email array
       from: User.mailId,
       subject: 'Sending Email from Node.js',
